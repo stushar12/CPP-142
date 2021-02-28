@@ -1,5 +1,5 @@
 # CPP-142
-Smallest Distinct Window
+Program to find the smallest window that contains all characters of string itself.
 
 
 
