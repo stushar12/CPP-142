@@ -1,54 +1,72 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int shortest(string str)
+
+int main()
 {
-	unordered_map<char,int> m;
-	set<char>st;
-	for(int i=0;i<str.length();i++)
-	{
-		st.insert(str[i]);
-	}
+    int test_cases;
+    cin>>test_cases;
 
-	int n=st.size();
-	int i=0;
-	int j=1;
-	int count=0;
+    while(test_cases--)
+    {
+        string input;
+        cin>>input;
 
-	m[str[i]]++;
-	count++;
+            unordered_map<int,char> ump;
+            set<int> s;
 
-	int minimum=INT_MAX;
+            for(int i=0;i<input.length();i++)
+            {
+                s.insert(input[i]);
+            }
+            int distinct=s.size();
+            int i=0,j=1,ans=INT_MAX,count=0,start=0;
 
-	while(i<=j && j<str.length())
-	{
-		if(count<n)
-		{
-			if(m[str[j]]==0)
-				count++;
-			j++;
-			m[str[j]]++;
-		}
-		else if(count==n)
-		{
-			minimum=min(minimum,j-i);
-			if(m[str[i]]==1)
-				count--;
-			m[str[i]]--;
-			i++;
-		}
-	}
+            ump[input[i]]++;
+            count++;
 
-	while(count==n)
-	{
-		minimum=min(minimum,j-i);
-		if(m[str[i]]==1)
-			count--;
-		m[str[i]]--;
-		i++;
+            while(i<=j and j<input.length())
+            {
+                if(count<distinct)
+                {
+                    if(ump[input[j]]==0)
+                    {  
+                        count++;
+                    }
+                        ump[input[j]]++;
+                        j++;
+                }
+                else if(count==distinct)
+                {
+                    if((j-i)<ans)
+                    {
+                        ans=j-i;
+                        start=i;
+                    }
+                    if(ump[input[i]]==1)
+                    {
+                        count--;
+                    }
+                    ump[input[i]]--;
+                    i++;
+                }
+            }
 
-	}
-
-
-cout<<minimum<<endl;
+            while(count==distinct)
+            {
+                  if((j-i)<ans)
+                    {
+                        ans=j-i;
+                        start=i;
+                    }
+                    if(ump[input[i]]==1)
+                    {
+                        count--;
+                    }
+                    ump[input[i]]--;
+                    i++;
+            }
+    
+        cout<<ans<<"  "<<input.substr(start,ans)<<endl;
+    }
 }
