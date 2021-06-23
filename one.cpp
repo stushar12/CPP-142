@@ -12,7 +12,7 @@ int main()
         string input;
         cin>>input;
 
-            unordered_map<int,char> ump;
+            unordered_map<char,int> ump;
             set<int> s;
 
             for(int i=0;i<input.length();i++)
